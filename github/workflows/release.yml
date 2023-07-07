@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - '[0-9].[0-9].x'
+      - '[0-9].x.x'
+      - '[0-9].x'
+      # - master
+      - main
+      - next
+      # - next-major
+      - rc
+      - beta
+      - alpha
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      # Checkout
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.TOKEN }}
+      # Import GPG Key
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v5
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+      # Setup NodeJs
+      - name: Setup NodeJs
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
+      # Build source code
+      - name: Build source code
+        run: npm run build
+      # Release
+      - name: Release
+        env:
+          # variables
+          GIT_AUTHOR_NAME: ${{ vars.GIT_AUTHOR_NAME }}
+          GIT_AUTHOR_EMAIL: ${{ vars.GIT_AUTHOR_EMAIL }}
+          GIT_COMMITTER_NAME: ${{ vars.GIT_COMMITTER_NAME }}
+          GIT_COMMITTER_EMAIL: ${{ vars.GIT_COMMITTER_EMAIL }}
+          # secrets
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+      # Rebase to 'dev'
+      - name: Rebase to 'dev'
+        run: |
+          git checkout dev
+          git pull --rebase origin main
+          git push --force
