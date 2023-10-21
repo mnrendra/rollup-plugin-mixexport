@@ -1,32 +1,42 @@
 import type { Plugin } from 'rollup'
 
 import { buildStart, renderChunk } from './hooks'
+import { readPackage } from './utils'
 
 /**
  * Rollup plugin for mixing exports.
  * @returns Rollup plugin object
  */
-const main = (): Plugin => ({
-  /**
-   * Rollup Plugin Properties
-   */
+const main = async (): Promise<Plugin> => {
+  // Get the package's properties.
+  const { name, version } = await readPackage()
 
-  // Name
-  name: 'mixexport',
+  // Return Rollup plugin object.
+  return {
+    /**
+     * Properties
+     */
 
-  /**
-   * Rollup Plugin Build Hooks
-   */
+    // Name
+    name,
 
-  // Build Start
-  buildStart,
+    // Version
+    version,
 
-  /**
-   * Rollup Plugin Generation Hooks
-   */
+    /**
+     * Build Hooks
+     */
 
-  // Render Chunk
-  renderChunk
-})
+    // Build Start
+    buildStart,
+
+    /**
+     * Generation Hooks
+     */
+
+    // Render Chunk
+    renderChunk
+  }
+}
 
 export default main

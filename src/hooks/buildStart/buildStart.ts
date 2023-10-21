@@ -6,9 +6,9 @@ import { requirementsCheck } from './utils'
  * Rollup build hooks.
  * @param InputOptions Rollup's `NormalizedInputOptions`
  */
-function buildStart ({
+async function buildStart ({
   plugins
-}: NormalizedInputOptions): void {
+}: NormalizedInputOptions): Promise<void> {
   // Check if the requirements are met.
   requirementsCheck({ plugins })
 }
