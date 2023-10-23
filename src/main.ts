@@ -1,15 +1,17 @@
 import type { Plugin } from 'rollup'
 
-import { buildStart, renderChunk } from './hooks'
-import { readPackage } from './utils'
+import { buildStart } from './core/buildHooks'
+import { renderChunk } from './core/outputGenerationHooks'
+
+import store, { initStore } from './store'
 
 /**
  * Rollup plugin for mixing exports.
  * @returns Rollup plugin object
  */
 const main = async (): Promise<Plugin> => {
-  // Get the package's properties.
-  const { name, version } = await readPackage()
+  // Initialize store.
+  await initStore()
 
   // Return Rollup plugin object.
   return {
@@ -17,24 +19,19 @@ const main = async (): Promise<Plugin> => {
      * Properties
      */
 
-    // Name
-    name,
-
-    // Version
-    version,
+    name: store.pluginName,
+    version: store.version,
 
     /**
      * Build Hooks
      */
 
-    // Build Start
     buildStart,
 
     /**
-     * Generation Hooks
+     * Output Generation Hooks
      */
 
-    // Render Chunk
     renderChunk
   }
 }

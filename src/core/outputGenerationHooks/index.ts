@@ -1,3 +1,5 @@
 import renderChunk from './renderChunk'
 
-export default renderChunk
+export {
+  renderChunk
+}
