@@ -1,3 +1,5 @@
 import buildStart from './buildStart'
 
-export default buildStart
+export {
+  buildStart
+}
