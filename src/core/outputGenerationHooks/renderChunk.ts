@@ -15,11 +15,11 @@ import store from '../../store'
  * @param ouputOptions The normalized output options
  * @returns The new rendered chunk object
  */
-async function renderChunk (
+function renderChunk (
   code: string,
   { exports }: RenderedChunk,
   { format }: NormalizedOutputOptions
-): Promise<ReturnType<RenderChunkHook>> {
+): ReturnType<RenderChunkHook> {
   // Return the default value if criteria aren't met.
   if (!(
     (format === 'cjs' || (format as ModuleFormat) === 'commonjs') &&

@@ -1,9 +1,9 @@
 import type { Plugin } from 'rollup'
 
+import store, { initStore } from './store'
+
 import { buildStart } from './core/buildHooks'
 import { renderChunk } from './core/outputGenerationHooks'
-
-import store, { initStore } from './store'
 
 /**
  * Rollup plugin for mixing exports.
