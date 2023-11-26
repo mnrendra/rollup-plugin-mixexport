@@ -1,15 +1,19 @@
-import type { NormalizedInputOptions } from 'rollup'
+import type { NormalizedInputOptions, Plugin } from 'rollup'
 
 import store from '../../store'
+
+export type BuildStartOptions = Omit<NormalizedInputOptions, 'plugins'> & {
+  plugins: Plugin | Plugin[]
+}
 
 /**
  * The Rollup `buildStart` hook.
  * Part of Rollup's Build Hooks.
  * @param InputOptions Rollup `NormalizedInputOptions`
  */
-function buildStart ({
+function buildStart <T extends BuildStartOptions = NormalizedInputOptions> ({
   plugins
-}: NormalizedInputOptions): void {
+}: T): void {
   // Throw an error if the `plugins` is not an array.
   if (!Array.isArray(plugins)) {
     throw new Error(

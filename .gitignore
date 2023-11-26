@@ -1,3 +1,16 @@
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+*~
+.*.swp
+Thumbs.db
+Desktop.ini
+.Trashes
+.Spotlight-V100
+Icon
+ehthumbs.db
+
 # Logs
 logs
 *.log
@@ -68,6 +81,7 @@ web_modules/
 
 # Output of 'npm pack'
 *.tgz
+package
 
 # Yarn Integrity file
 .yarn-integrity

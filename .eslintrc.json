@@ -4,12 +4,11 @@
     "es2021": true
   },
   "extends": "standard-with-typescript",
-  "overrides": [
-  ],
+  "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
-    "project": "tsconfig.json",
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "tsconfig.json"
   },
   "rules": {
     "max-len": ["warn", {
