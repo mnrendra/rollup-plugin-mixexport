@@ -58,6 +58,8 @@ jobs:
           # secrets
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # node environments
+          # NODE_ENV: 'production'
         run: npx semantic-release
       # Rebase to 'dev'
       - name: Rebase to 'dev'
