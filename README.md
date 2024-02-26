@@ -1,6 +1,6 @@
 # @mnrendra/rollup-plugin-mixexport
 
-🍣 A Rollup plugin to mix the **named** and **default** exports together.  
+🍣 A [Rollup](https://rollupjs.org/) plugin to mix the **named** and **default** exports together.  
 So, the consumers of your bundle will not have to use **chunk**`.default` to access their default export.
 
 ## Example:
@@ -41,12 +41,12 @@ So, Rollup will automatically add `.default` for every **default** export that i
 ## Requirements
 This plugin requires:  
 ✅ [LTS](https://github.com/nodejs/Release) Node version (v14.0.0+),  
-✅ Rollup v1.20.0+,  
-✅ [rollup-plugin-esbuild](https://www.npmjs.com/package/rollup-plugin-esbuild)  
+✅ [Rollup](https://www.npmjs.com/package/rollup) (v1.20.0+),  
+✅ [ESBuild](https://www.npmjs.com/package/rollup-plugin-esbuild) plugin (v4.10.3+)  
 
 ## Install
 ```bash
-npm i -D @mnrendra/rollup-plugin-mixexport
+npm i -D rollup-plugin-esbuild @mnrendra/rollup-plugin-mixexport
 ```
 
 ## Usage
@@ -59,7 +59,7 @@ import mixexport from '@mnrendra/rollup-plugin-mixexport'
 export default [
   {
     external: (id) => !/^[./]/.test(id),
-    input: 'your_input_file.(js|jsx|ts|tsx)',
+    input: 'your_input_file.(js|cjs|mjs|jsx|ts|cts|mts|tsx)',
     output: [
       {
         file: 'dist/your_output_file.js',
@@ -67,7 +67,7 @@ export default [
         sourcemap: true
       },
       {
-        file: 'dist/index.mjs',
+        file: 'dist/your_output_file.mjs',
         format: 'es',
         sourcemap: true
       }
@@ -77,7 +77,7 @@ export default [
       mixexport() // <-- execute `mixexport` immediately after `esbuild`
     ],
     onwarn ({ code }) {
-      if (code === 'MIXED_EXPORTS') return false // to disable Rollup 'MIXED_EXPORTS' warn log
+      if (code === 'MIXED_EXPORTS') return false // to disable Rollup's 'MIXED_EXPORTS' warning log
     }
   }
 ]
@@ -91,7 +91,7 @@ const mixexport = require('@mnrendra/rollup-plugin-mixexport')
 module.export = [
   {
     external: (id) => !/^[./]/.test(id),
-    input: 'your_input_file.(js|jsx|ts|tsx)',
+    input: 'your_input_file.(js|cjs|mjs|jsx|ts|cts|mts|tsx)',
     output: [
       {
         file: 'dist/your_output_file.js',
@@ -99,7 +99,7 @@ module.export = [
         sourcemap: true
       },
       {
-        file: 'dist/index.mjs',
+        file: 'dist/your_output_file.mjs',
         format: 'es',
         sourcemap: true
       }
@@ -109,7 +109,7 @@ module.export = [
       mixexport()
     ],
     onwarn ({ code }) {
-      if (code === 'MIXED_EXPORTS') return false // to disable Rollup 'MIXED_EXPORTS' warn log
+      if (code === 'MIXED_EXPORTS') return false // to disable Rollup's 'MIXED_EXPORTS' warning log
     }
   }
 ]
