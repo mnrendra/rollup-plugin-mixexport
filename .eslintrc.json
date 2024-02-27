@@ -1,0 +1,21 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": "standard-with-typescript",
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "tsconfig.json"
+  },
+  "rules": {
+    "max-len": ["warn", {
+      "ignoreUrls": true,
+      "ignoreTemplateLiterals": true,
+      "ignoreStrings": true
+    }],
+    "@typescript-eslint/strict-boolean-expressions": "off"
+  }
+}
