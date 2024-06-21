@@ -7,7 +7,8 @@ import { renderChunk } from './core/outputGenerationHooks'
 
 /**
  * Rollup plugin for mixing exports.
- * @returns Rollup plugin object
+ *
+ * @returns {Promise<Plugin>} Rollup plugin object.
  */
 const main = async (): Promise<Plugin> => {
   // Initialize store.
@@ -36,4 +37,5 @@ const main = async (): Promise<Plugin> => {
   }
 }
 
+// Export the `main` as the default value.
 export default main

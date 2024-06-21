@@ -1,10 +1,11 @@
-import { renderedChunk, outputOptions } from '@tests/stubs'
-
 import { initStore } from '../../store'
+
+import renderedChunk from '@tests/stubs/renderedChunk'
+import outputOptions from '@tests/stubs/outputOptions'
 
 import renderChunk from './renderChunk'
 
-describe('Test `renderChunk`.', () => {
+describe('Test `renderChunk`:', () => {
   const defaultValue = { code: '', map: null }
 
   beforeAll(async () => {

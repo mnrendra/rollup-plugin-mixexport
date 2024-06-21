@@ -25,4 +25,5 @@ const store = {
   }
 }
 
+// Export the `store` as the default value.
 export default store

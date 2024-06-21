@@ -1,15 +1,15 @@
-import { inputOptions } from '@tests/stubs'
-
 import store, { initStore } from '../../store'
+
+import inputOptions from '@tests/stubs/inputOptions'
 
 import { buildStart } from '.'
 
-describe('Test `buildHooks`.', () => {
+describe('Test `buildHooks`:', () => {
   beforeAll(async () => {
     await initStore()
   })
 
-  describe('Test `buildStart`.', () => {
+  describe('Test `buildStart`:', () => {
     it('Should throw an error if the `plugins` is not an array!', () => {
       const received = (): void => {
         buildStart({

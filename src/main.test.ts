@@ -2,13 +2,15 @@ import type { Plugin, RenderedChunk, NormalizedOutputOptions, RenderChunkHook } 
 
 import type { BuildStartOptions } from './core/buildHooks/buildStart'
 
-import { inputOptions, renderedChunk, outputOptions } from '@tests/stubs'
+import inputOptions from '@tests/stubs/inputOptions'
+import renderedChunk from '@tests/stubs/renderedChunk'
+import outputOptions from '@tests/stubs/outputOptions'
 
 import store from './store'
 
 import main from './main'
 
-describe('Test `main`.', () => {
+describe('Test main feature:', () => {
   let received: Plugin = { name: '' }
 
   beforeAll(async () => {

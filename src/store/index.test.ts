@@ -4,8 +4,8 @@ import store from './store'
 
 import initStore from './initStore'
 
-describe('Test `store`.', () => {
-  describe('Test `store`.', () => {
+describe('Test `store`:', () => {
+  describe('Test `store`:', () => {
     test('Should set `name` and `pluginName` correctly!', () => {
       store.setName('@mnrendra/rollup-plugin-mixexport')
       expect(store.name).toBe('@mnrendra/rollup-plugin-mixexport')
@@ -23,7 +23,7 @@ describe('Test `store`.', () => {
     })
   })
 
-  describe('Test `initStore`.', () => {
+  describe('Test `initStore`:', () => {
     it('Should initialize the store with package data!', async () => {
       const packageData = await readPackage()
 
