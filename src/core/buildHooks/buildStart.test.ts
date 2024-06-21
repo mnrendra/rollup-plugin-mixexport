@@ -1,10 +1,10 @@
-import { inputOptions } from '@tests/stubs'
-
 import store, { initStore } from '../../store'
+
+import inputOptions from '@tests/stubs/inputOptions'
 
 import buildStart from './buildStart'
 
-describe('Test `buildStart`.', () => {
+describe('Test `buildStart`:', () => {
   beforeAll(async () => {
     await initStore()
   })

@@ -1,17 +1,18 @@
-import { renderedChunk, outputOptions } from '@tests/stubs'
-
 import { initStore } from '../../store'
+
+import renderedChunk from '@tests/stubs/renderedChunk'
+import outputOptions from '@tests/stubs/outputOptions'
 
 import { renderChunk } from '.'
 
-describe('Test `outputGenerationHooks`.', () => {
-  const defaultValue = { code: '', map: null }
-
+describe('Test `outputGenerationHooks`:', () => {
   beforeAll(async () => {
     await initStore()
   })
 
-  describe('Test `renderChunk`.', () => {
+  describe('Test `renderChunk`:', () => {
+    const defaultValue = { code: '', map: null }
+
     it('Should return the original chunk if the `format` is not "cjs" or "commonjs"!', () => {
       const received = renderChunk(
         '',

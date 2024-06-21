@@ -1,6 +1,6 @@
 import store from './store'
 
-describe('Test `store`.', () => {
+describe('Test `store`:', () => {
   test('Should set `name` and `pluginName` correctly!', () => {
     store.setName('@mnrendra/rollup-plugin-mixexport')
     expect(store.name).toBe('@mnrendra/rollup-plugin-mixexport')

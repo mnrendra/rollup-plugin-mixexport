@@ -4,7 +4,7 @@ import store from './store'
 
 import initStore from './initStore'
 
-describe('Test `initStore`.', () => {
+describe('Test `initStore`:', () => {
   it('Should initialize the store with package data!', async () => {
     const packageData = await readPackage()
 

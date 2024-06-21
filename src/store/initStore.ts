@@ -19,4 +19,5 @@ const initStore = async (): Promise<void> => {
   store.setHomepage(homepage as string)
 }
 
+// Export the `initStore` as the default value.
 export default initStore
