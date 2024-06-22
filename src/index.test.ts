@@ -11,10 +11,18 @@ import store from './store'
 import index from '.'
 
 describe('Test all features:', () => {
+  let log: jest.SpyInstance
+
   let received: Plugin = { name: '' }
 
   beforeAll(async () => {
+    log = jest.spyOn(console, 'log').mockImplementation(() => {})
+
     received = await index()
+  })
+
+  afterAll(() => {
+    log.mockRestore()
   })
 
   describe('Test the `name` property:', () => {
