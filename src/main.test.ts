@@ -11,10 +11,18 @@ import store from './store'
 import main from './main'
 
 describe('Test main feature:', () => {
+  let log: jest.SpyInstance
+
   let received: Plugin = { name: '' }
 
   beforeAll(async () => {
+    log = jest.spyOn(console, 'log').mockImplementation(() => {})
+
     received = await main()
+  })
+
+  afterAll(() => {
+    log.mockRestore()
   })
 
   describe('Test the `name` property:', () => {
