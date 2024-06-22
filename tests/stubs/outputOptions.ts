@@ -36,6 +36,7 @@ const outputOptions: NormalizedOutputOptions = {
   globals: {},
   hashCharacters: 'base64',
   hoistTransitiveImports: false,
+  importAttributesKey: 'assert',
   indent: '',
   inlineDynamicImports: false,
   interop: () => 'auto',

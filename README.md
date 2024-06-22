@@ -41,7 +41,7 @@ So, Rollup will automatically add `.default` for every **default** export that i
 ## Requirements
 This plugin requires:  
 ✅ [LTS](https://github.com/nodejs/Release) Node version (v14.0.0+),  
-✅ [Rollup](https://www.npmjs.com/package/rollup) (v4.12.0+),  
+✅ [Rollup](https://www.npmjs.com/package/rollup) (v4.18.0+),  
 ✅ [ESBuild](https://www.npmjs.com/package/rollup-plugin-esbuild) plugin (v6.1.1+)  
 
 ## Install
@@ -116,7 +116,7 @@ module.export = [
 ```
 
 ## License
-[MIT](https://github.com/mnrendra/read-packag/blob/HEAD/LICENSE)
+[MIT](https://github.com/mnrendra/rollup-plugin-mixexport/blob/HEAD/LICENSE)
 
 ## Author
 [@mnrendra](https://github.com/mnrendra)

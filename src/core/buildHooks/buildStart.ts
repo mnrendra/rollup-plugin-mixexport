@@ -9,7 +9,8 @@ export type BuildStartOptions = Omit<NormalizedInputOptions, 'plugins'> & {
 /**
  * The Rollup `buildStart` hook.
  * Part of Rollup's Build Hooks.
- * @param InputOptions Rollup `NormalizedInputOptions`
+ *
+ * @param {object} InputOptions - Rollup `NormalizedInputOptions`.
  */
 function buildStart <T extends BuildStartOptions = NormalizedInputOptions> ({
   plugins
@@ -37,4 +38,5 @@ function buildStart <T extends BuildStartOptions = NormalizedInputOptions> ({
   }
 }
 
+// Export the `buildStart` as the default value.
 export default buildStart

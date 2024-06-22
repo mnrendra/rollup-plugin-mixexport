@@ -10,10 +10,12 @@ import store from '../../store'
 /**
  * The Rollup `renderChunk` hook.
  * Part of Rollup's Output Generation Hooks.
- * @param code The stringed code from `Rollup`
- * @param chunk The rendered chunk
- * @param ouputOptions The normalized output options
- * @returns The new rendered chunk object
+ *
+ * @param {string} code - The stringed code from `Rollup`.
+ * @param {object} chunk - The rendered chunk.
+ * @param {object} ouputOptions - The normalized output options.
+ *
+ * @returns {object} The new rendered chunk object.
  */
 function renderChunk (
   code: string,
@@ -95,4 +97,5 @@ function renderChunk (
   }
 }
 
+// Export the `renderChunk` as the default value.
 export default renderChunk

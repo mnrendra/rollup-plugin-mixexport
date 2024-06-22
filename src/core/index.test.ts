@@ -1,16 +1,20 @@
-import { inputOptions, renderedChunk, outputOptions } from '@tests/stubs'
+import { initStore } from '@mnrendra/rollup-utils'
 
-import store, { initStore } from '../store'
+import store from '../store'
+
+import inputOptions from '@tests/stubs/inputOptions'
+import renderedChunk from '@tests/stubs/renderedChunk'
+import outputOptions from '@tests/stubs/outputOptions'
 
 import { buildHooks, outputGenerationHooks } from '.'
 
-describe('Test `core`.', () => {
+describe('Test `core`:', () => {
   beforeAll(async () => {
-    await initStore()
+    await initStore(store)
   })
 
-  describe('Test `buildHooks`.', () => {
-    describe('Test `buildStart`.', () => {
+  describe('Test `buildHooks`:', () => {
+    describe('Test `buildStart`:', () => {
       it('Should throw an error if the `plugins` is not an array!', () => {
         const received = (): void => {
           buildHooks.buildStart({
@@ -63,8 +67,8 @@ describe('Test `core`.', () => {
     })
   })
 
-  describe('Test `outputGenerationHooks`.', () => {
-    describe('Test `renderChunk`.', () => {
+  describe('Test `outputGenerationHooks`:', () => {
+    describe('Test `renderChunk`:', () => {
       const defaultValue = { code: '', map: null }
 
       it('Should return the original chunk if the `format` is not "cjs" or "commonjs"!', () => {

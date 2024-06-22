@@ -2,17 +2,27 @@ import type { Plugin, RenderedChunk, NormalizedOutputOptions, RenderChunkHook } 
 
 import type { BuildStartOptions } from './core/buildHooks/buildStart'
 
-import { inputOptions, renderedChunk, outputOptions } from '@tests/stubs'
+import inputOptions from '@tests/stubs/inputOptions'
+import renderedChunk from '@tests/stubs/renderedChunk'
+import outputOptions from '@tests/stubs/outputOptions'
 
 import store from './store'
 
 import index from '.'
 
-describe('Test `index`.', () => {
+describe('Test all features:', () => {
+  let log: jest.SpyInstance
+
   let received: Plugin = { name: '' }
 
   beforeAll(async () => {
+    log = jest.spyOn(console, 'log').mockImplementation(() => {})
+
     received = await index()
+  })
+
+  afterAll(() => {
+    log.mockRestore()
   })
 
   describe('Test the `name` property:', () => {
