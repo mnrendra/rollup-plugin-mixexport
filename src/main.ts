@@ -1,6 +1,8 @@
 import type { Plugin } from 'rollup'
 
-import store, { initStore } from './store'
+import { initStore } from '@mnrendra/rollup-utils'
+
+import store from './store'
 
 import { buildStart } from './core/buildHooks'
 import { renderChunk } from './core/outputGenerationHooks'
@@ -12,7 +14,7 @@ import { renderChunk } from './core/outputGenerationHooks'
  */
 const main = async (): Promise<Plugin> => {
   // Initialize store.
-  await initStore()
+  await initStore(store)
 
   // Return Rollup plugin object.
   return {

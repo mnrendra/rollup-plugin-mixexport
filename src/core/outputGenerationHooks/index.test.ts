@@ -1,4 +1,6 @@
-import { initStore } from '../../store'
+import { initStore } from '@mnrendra/rollup-utils'
+
+import store from '../../store'
 
 import renderedChunk from '@tests/stubs/renderedChunk'
 import outputOptions from '@tests/stubs/outputOptions'
@@ -7,7 +9,7 @@ import { renderChunk } from '.'
 
 describe('Test `outputGenerationHooks`:', () => {
   beforeAll(async () => {
-    await initStore()
+    await initStore(store)
   })
 
   describe('Test `renderChunk`:', () => {
