@@ -27,6 +27,7 @@
   "homepage": "https://github.com/mnrendra/rollup-plugin-mixexport#readme",
   "dependencies": {
     "@mnrendra/read-package": "^2.2.0",
+    "@mnrendra/rollup-utils": "^1.1.0",
     "rollup": "^4.18.0"
   },
   "devDependencies": {

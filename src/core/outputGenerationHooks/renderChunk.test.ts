@@ -1,4 +1,6 @@
-import { initStore } from '../../store'
+import { initStore } from '@mnrendra/rollup-utils'
+
+import store from '../../store'
 
 import renderedChunk from '@tests/stubs/renderedChunk'
 import outputOptions from '@tests/stubs/outputOptions'
@@ -9,7 +11,7 @@ describe('Test `renderChunk`:', () => {
   const defaultValue = { code: '', map: null }
 
   beforeAll(async () => {
-    await initStore()
+    await initStore(store)
   })
 
   it('Should return the original chunk if the `format` is not "cjs" or "commonjs"!', () => {

@@ -1,4 +1,6 @@
-import store, { initStore } from '../store'
+import { initStore } from '@mnrendra/rollup-utils'
+
+import store from '../store'
 
 import inputOptions from '@tests/stubs/inputOptions'
 import renderedChunk from '@tests/stubs/renderedChunk'
@@ -8,7 +10,7 @@ import { buildHooks, outputGenerationHooks } from '.'
 
 describe('Test `core`:', () => {
   beforeAll(async () => {
-    await initStore()
+    await initStore(store)
   })
 
   describe('Test `buildHooks`:', () => {

@@ -1,4 +1,6 @@
-import store, { initStore } from '../../store'
+import { initStore } from '@mnrendra/rollup-utils'
+
+import store from '../../store'
 
 import inputOptions from '@tests/stubs/inputOptions'
 
@@ -6,7 +8,7 @@ import { buildStart } from '.'
 
 describe('Test `buildHooks`:', () => {
   beforeAll(async () => {
-    await initStore()
+    await initStore(store)
   })
 
   describe('Test `buildStart`:', () => {
