@@ -121,5 +121,45 @@ describe('Test `outputGenerationHooks`:', () => {
 
       expect(received).toEqual(expected)
     })
+
+    describe('By mocking `store.excludeDefault` value to `true`:', () => {
+      beforeEach(() => {
+        store.excludeDefault = true
+      })
+
+      afterEach(() => {
+        delete store.excludeDefault
+      })
+
+      it('Should return rendered chunk with mixing exports and exclude `default` in un-minified format!', () => {
+        const received = renderChunk(
+          'exports.main = main;\nexports.default = main;',
+          { ...renderedChunk, exports: ['main', 'default'] },
+          { ...outputOptions, format: 'cjs' }
+        )
+
+        const expected = {
+          ...defaultValue,
+          code: 'module.exports = main;\nmodule.exports.main = main;'
+        }
+
+        expect(received).toEqual(expected)
+      })
+
+      it('Should return rendered chunk with mixing exports and exclude `default` in minified format!', () => {
+        const received = renderChunk(
+          'exports.main=main;exports.default=main;',
+          { ...renderedChunk, exports: ['main', 'default'] },
+          { ...outputOptions, format: 'cjs' }
+        )
+
+        const expected = {
+          ...defaultValue,
+          code: 'module.exports=main,module.exports.main=main;'
+        }
+
+        expect(received).toEqual(expected)
+      })
+    })
   })
 })

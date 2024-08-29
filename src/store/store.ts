@@ -1,10 +1,14 @@
-import type { Store } from '@mnrendra/rollup-utils'
+import type { Store as Storage } from '@mnrendra/rollup-utils'
+import type { Options } from '../types'
+
+interface Store extends Storage, Options {}
 
 const store: Store = {
   pluginName: '',
   name: '',
   version: '',
-  homepage: ''
+  homepage: '',
+  excludeDefault: false
 }
 
 export default store
