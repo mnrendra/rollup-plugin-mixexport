@@ -85,10 +85,14 @@ function renderChunk (
   // Get the default variable.
   const defaultVar = matches[1]
 
+  const endSegment = store.excludeDefault === true
+    ? lastSegment.replace(/([,;])\s*(module\.)?exports\.default\s*=\s*([^,;]+)/, '')
+    : lastSegment
+
   // Reassemble the segmented codes.
-  const reassembledCode = !lastSegment.includes(' = ')
-    ? `${firstSegment}module.exports=${defaultVar},${lastSegment}`
-    : `${firstSegment}module.exports = ${defaultVar};\n${lastSegment}`
+  const reassembledCode = !endSegment.includes(' = ')
+    ? `${firstSegment}module.exports=${defaultVar},${endSegment}`
+    : `${firstSegment}module.exports = ${defaultVar};\n${endSegment}`
 
   // Return the new rendered chunk object.
   return {
