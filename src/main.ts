@@ -1,5 +1,7 @@
 import type { Plugin } from 'rollup'
 
+import type { Options } from './types'
+
 import { initStore, printInfo } from '@mnrendra/rollup-utils'
 
 import store from './store'
@@ -12,9 +14,12 @@ import { renderChunk } from './core/outputGenerationHooks'
  *
  * @returns {Promise<Plugin>} Rollup plugin object.
  */
-const main = async (): Promise<Plugin> => {
+const main = async ({
+  excludeDefault = false
+}: Options = {}): Promise<Plugin> => {
   // Initialize store.
   await initStore(store)
+  store.excludeDefault = excludeDefault
 
   // Print info.
   await printInfo(store)

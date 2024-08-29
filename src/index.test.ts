@@ -184,5 +184,45 @@ describe('Test all features:', () => {
         code: 'module.exports=main,module.exports.main=main;module.exports.default=main;'
       })
     })
+
+    describe('By mocking `store.excludeDefault` value to `true`:', () => {
+      beforeEach(() => {
+        store.excludeDefault = true
+      })
+
+      afterEach(() => {
+        delete store.excludeDefault
+      })
+
+      it('Should return rendered chunk with mixing exports and exclude `default` in un-minified format!', () => {
+        const renderChunk = received.renderChunk as RenderChunk
+
+        const expected = {
+          ...defaultValue,
+          code: 'module.exports = main;\nmodule.exports.main = main;'
+        }
+
+        expect(renderChunk(
+          'exports.main = main;\nexports.default = main;',
+          { ...renderedChunk, exports: ['main', 'default'] },
+          { ...outputOptions, format: 'cjs' }
+        )).toEqual(expected)
+      })
+
+      it('Should return rendered chunk with mixing exports and exclude `default` in minified format!', () => {
+        const renderChunk = received.renderChunk as RenderChunk
+
+        const expected = {
+          ...defaultValue,
+          code: 'module.exports=main,module.exports.main=main;'
+        }
+
+        expect(renderChunk(
+          'exports.main=main;exports.default=main;',
+          { ...renderedChunk, exports: ['main', 'default'] },
+          { ...outputOptions, format: 'cjs' }
+        )).toEqual(expected)
+      })
+    })
   })
 })

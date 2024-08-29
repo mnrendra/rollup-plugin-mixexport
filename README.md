@@ -105,7 +105,7 @@ module.export = [
       }
     ],
     plugins: [
-      esbuild.default({ minify: true }),
+      esbuild({ minify: true }),
       mixexport()
     ],
     onwarn ({ code }) {
@@ -113,6 +113,45 @@ module.export = [
     }
   }
 ]
+```
+
+## Options
+```javascript
+const mixexport = require('@mnrendra/rollup-plugin-mixexport')
+
+module.export = [
+  {
+    plugins: [
+      mixexport({
+        /**
+         * Exclude `module.exports.default`
+         *
+         * Set to `true` to exclude `module.exports.default`
+         *
+         * @default false
+         */
+        excludeDefault: true
+      })
+    ]
+  }
+]
+```
+### • `excludeDefault`
+#### type: `boolean`
+#### default: `false`
+Exclude `module.exports.default`.<br/>
+Set to `true` to exclude `module.exports.default`.<br/>
+
+By default, `mixexport` generates output as follows:
+```javascript
+module.exports = main;
+module.exports.main = main;
+module.exports.default = main;
+```
+However, if the `excludeDefault` option is set to `true`, `mixexport` generates output as follows:
+```javascript
+module.exports = main;
+module.exports.main = main;
 ```
 
 ## License
