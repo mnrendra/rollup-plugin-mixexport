@@ -63,7 +63,8 @@ const outputOptions: NormalizedOutputOptions = {
   sourcemapPathTransform: undefined,
   strict: false,
   systemNullSetters: false,
-  validate: false
+  validate: false,
+  virtualDirname: ''
 }
 
 export default outputOptions

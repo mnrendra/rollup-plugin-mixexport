@@ -1,4 +1,4 @@
-import type { Plugin } from 'rollup'
+import type { Plugin as RollupPlugin } from 'rollup'
 
 import type { Options } from './types'
 
@@ -6,20 +6,30 @@ import { initStore, printInfo } from '@mnrendra/rollup-utils'
 
 import store from './store'
 
-import { buildStart } from './core/buildHooks'
-import { renderChunk } from './core/outputGenerationHooks'
+import { buildHooks, outputGenerationHooks } from './core'
+
+interface Plugin extends RollupPlugin {
+  name: string
+  version: string
+  buildStart: typeof buildHooks.buildStart
+  renderChunk: typeof outputGenerationHooks.renderChunk
+}
 
 /**
  * Rollup plugin for mixing exports.
  *
  * @returns {Promise<Plugin>} Rollup plugin object.
+ *
+ * @see https://www.npmjs.com/package/@mnrendra/rollup-plugin-mixexport
  */
 const main = async ({
-  excludeDefault = false
+  minify = false
 }: Options = {}): Promise<Plugin> => {
   // Initialize store.
   await initStore(store)
-  store.excludeDefault = excludeDefault
+
+  // Store `minify` option.
+  store.minify = minify
 
   // Print info.
   await printInfo(store)
@@ -37,13 +47,13 @@ const main = async ({
      * Build Hooks
      */
 
-    buildStart,
+    buildStart: buildHooks.buildStart,
 
     /**
      * Output Generation Hooks
      */
 
-    renderChunk
+    renderChunk: outputGenerationHooks.renderChunk
   }
 }
 
