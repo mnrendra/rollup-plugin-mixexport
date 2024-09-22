@@ -1,22 +1,34 @@
 import { initStore } from '@mnrendra/rollup-utils'
 
-import store from '../../store'
+import store from '../store'
 
-import inputOptions from '@tests/stubs/inputOptions'
-
-import { buildStart } from '.'
+import { buildStart } from './buildHooks'
 
 describe('Test `buildHooks`:', () => {
-  beforeAll(async () => {
-    await initStore(store)
-  })
-
   describe('Test `buildStart`:', () => {
-    it('Should throw an error if the `plugins` is not an array!', () => {
+    beforeAll(async () => {
+      await initStore(store)
+    })
+
+    it('Should throw an error if `plugins` is not an array!', () => {
       const received = (): void => {
         buildStart({
-          ...inputOptions,
           plugins: { name: '' }
+        })
+      }
+
+      const expected = Error(
+        '`rollup-plugin-esbuild` is required and must be invoked immediately ' +
+        `before \`${store.name}\`!\nMore info: ${store.homepage}`
+      )
+
+      expect(received).toThrow(expected)
+    })
+
+    it('Should throw an error if `plugins` is an array but contains invalid elements!', () => {
+      const received = (): void => {
+        buildStart({
+          plugins: [null]
         })
       }
 
@@ -31,7 +43,6 @@ describe('Test `buildHooks`:', () => {
     it('Should not throw an error if the preceding plugin is "esbuild"!', () => {
       const received = (): void => {
         buildStart({
-          ...inputOptions,
           plugins: [
             { name: 'esbuild' },
             { name: 'mixexport' }
@@ -47,7 +58,6 @@ describe('Test `buildHooks`:', () => {
     it('Should throw an error if the preceding plugin is not "esbuild"!', () => {
       const received = (): void => {
         buildStart({
-          ...inputOptions,
           plugins: [
             { name: 'mixexport' }
           ]

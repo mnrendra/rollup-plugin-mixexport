@@ -1,5 +1,5 @@
-import * as stubs from './stubs'
+import * as dummies from './dummies'
 
 export {
-  stubs
+  dummies
 }
