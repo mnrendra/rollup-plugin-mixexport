@@ -35,13 +35,12 @@ index() // will print: 'default'
 named() // will print: 'named'
 ```
 ## Why?
-Because by default, Rollup will not mix the **named** and **default** exports together.  
-So, Rollup will automatically add `.default` for every **default** export that is mixed with the **named** exports.  
+By default, Rollup keeps **named** and **default** exports separate, requiring `.default` for default exports. This plugin simplifies the consumer experience by merging them.
 
 ## Requirements
 This plugin requires:  
 ✅ [LTS](https://github.com/nodejs/Release) Node version (v14.0.0+),  
-✅ [Rollup](https://www.npmjs.com/package/rollup) (v4.18.0+),  
+✅ [Rollup](https://www.npmjs.com/package/rollup) (v4.22.4+),  
 ✅ [ESBuild](https://www.npmjs.com/package/rollup-plugin-esbuild) plugin (v6.1.1+)  
 
 ## Install
@@ -88,7 +87,7 @@ Using `rollup.config.js`:
 const esbuild = require('rollup-plugin-esbuild') // 'rollup-plugin-esbuild' is required
 const mixexport = require('@mnrendra/rollup-plugin-mixexport')
 
-module.export = [
+module.exports = [
   {
     external: (id) => !/^[./]/.test(id),
     input: 'your_input_file.(js|cjs|mjs|jsx|ts|cts|mts|tsx)',
@@ -119,7 +118,7 @@ module.export = [
 ```javascript
 const mixexport = require('@mnrendra/rollup-plugin-mixexport')
 
-module.export = [
+module.exports = [
   {
     plugins: [
       mixexport({

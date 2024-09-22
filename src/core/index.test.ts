@@ -2,9 +2,8 @@ import { initStore } from '@mnrendra/rollup-utils'
 
 import store from '../store'
 
-import inputOptions from '@tests/stubs/inputOptions'
-import renderedChunk from '@tests/stubs/renderedChunk'
-import outputOptions from '@tests/stubs/outputOptions'
+import renderedChunk from '@tests/dummies/renderedChunk'
+import outputOptions from '@tests/dummies/outputOptions'
 
 import { buildHooks, outputGenerationHooks } from '.'
 
@@ -15,11 +14,29 @@ describe('Test `core`:', () => {
 
   describe('Test `buildHooks`:', () => {
     describe('Test `buildStart`:', () => {
-      it('Should throw an error if the `plugins` is not an array!', () => {
+      beforeAll(async () => {
+        await initStore(store)
+      })
+
+      it('Should throw an error if `plugins` is not an array!', () => {
         const received = (): void => {
           buildHooks.buildStart({
-            ...inputOptions,
             plugins: { name: '' }
+          })
+        }
+
+        const expected = Error(
+          '`rollup-plugin-esbuild` is required and must be invoked immediately ' +
+          `before \`${store.name}\`!\nMore info: ${store.homepage}`
+        )
+
+        expect(received).toThrow(expected)
+      })
+
+      it('Should throw an error if `plugins` is an array but contains invalid elements!', () => {
+        const received = (): void => {
+          buildHooks.buildStart({
+            plugins: [null]
           })
         }
 
@@ -34,7 +51,6 @@ describe('Test `core`:', () => {
       it('Should not throw an error if the preceding plugin is "esbuild"!', () => {
         const received = (): void => {
           buildHooks.buildStart({
-            ...inputOptions,
             plugins: [
               { name: 'esbuild' },
               { name: 'mixexport' }
@@ -50,7 +66,6 @@ describe('Test `core`:', () => {
       it('Should throw an error if the preceding plugin is not "esbuild"!', () => {
         const received = (): void => {
           buildHooks.buildStart({
-            ...inputOptions,
             plugins: [
               { name: 'mixexport' }
             ]
@@ -71,11 +86,16 @@ describe('Test `core`:', () => {
     describe('Test `renderChunk`:', () => {
       const defaultValue = { code: '', map: null }
 
+      beforeAll(async () => {
+        await initStore(store)
+      })
+
       it('Should return the original chunk if the `format` is not "cjs" or "commonjs"!', () => {
         const received = outputGenerationHooks.renderChunk(
           '',
-          { ...renderedChunk, exports: [] },
-          { ...outputOptions, format: 'es' }
+          renderedChunk,
+          { ...outputOptions, format: 'es' },
+          { chunks: {} }
         )
 
         const expected = defaultValue
@@ -83,11 +103,12 @@ describe('Test `core`:', () => {
         expect(received).toEqual(expected)
       })
 
-      it('Should return the original chunk if the `exports` length is less than two!', () => {
+      it('Should return the original chunk if there is no `exports.default` in the code!', () => {
         const received = outputGenerationHooks.renderChunk(
           '',
-          { ...renderedChunk, exports: [] },
-          { ...outputOptions, format: 'cjs' }
+          renderedChunk,
+          { ...outputOptions, format: 'cjs' },
+          { chunks: {} }
         )
 
         const expected = defaultValue
@@ -95,123 +116,150 @@ describe('Test `core`:', () => {
         expect(received).toEqual(expected)
       })
 
-      it('Should return the original chunk if the `exports` doesn\'t include "default"!', () => {
-        const received = outputGenerationHooks.renderChunk(
-          '',
-          { ...renderedChunk, exports: ['', ''] },
-          { ...outputOptions, format: 'cjs' }
+      it('Should throw an error if the `exports.default` value is `null`!', () => {
+        const received = (): void => {
+          outputGenerationHooks.renderChunk(
+            'var main=null;exports.main=main;exports.default=main;',
+            renderedChunk,
+            { ...outputOptions, format: 'cjs' },
+            { chunks: {} }
+          )
+        }
+
+        const expected = Error(
+          'Failed to mix exports: "null" cannot be used as a default value. ' +
+          'Only "object" and "function" are allowed.'
         )
 
-        const expected = defaultValue
-
-        expect(received).toEqual(expected)
+        expect(received).toThrow(expected)
       })
 
-      it('Should throw an error if the segment code is more than two!', () => {
+      it('Should throw an error if the `exports.default` value is a `bigint`!', () => {
         const received = (): void => {
           outputGenerationHooks.renderChunk(
-            'exports.main = main;\nexports.default = main;\nexports.main = main;',
-            { ...renderedChunk, exports: ['main', 'default'] },
-            { ...outputOptions, format: 'cjs' }
+            'var main=0n;exports.main=main;exports.default=main;',
+            renderedChunk,
+            { ...outputOptions, format: 'cjs' },
+            { chunks: {} }
           )
         }
 
-        const expected = Error
+        const expected = Error(
+          'Failed to mix exports: "bigint" cannot be used as a default value. ' +
+          'Only "object" and "function" are allowed.'
+        )
 
         expect(received).toThrow(expected)
       })
 
-      it('Should throw an error if the segment code is less than two!', () => {
+      it('Should throw an error if the `exports.default` value is a `boolean`!', () => {
         const received = (): void => {
           outputGenerationHooks.renderChunk(
-            'exports.default = main;',
-            { ...renderedChunk, exports: ['main', 'default'] },
-            { ...outputOptions, format: 'cjs' }
+            'var main=false;exports.main=main;exports.default=main;',
+            renderedChunk,
+            { ...outputOptions, format: 'cjs' },
+            { chunks: {} }
           )
         }
 
-        const expected = Error
+        const expected = Error(
+          'Failed to mix exports: "boolean" cannot be used as a default value. ' +
+          'Only "object" and "function" are allowed.'
+        )
 
         expect(received).toThrow(expected)
       })
 
-      it('Should throw an error if the default variable can\'t be found!', () => {
+      it('Should throw an error if the `exports.default` value is a `number`!', () => {
         const received = (): void => {
           outputGenerationHooks.renderChunk(
-            'exports.main = main;',
-            { ...renderedChunk, exports: ['main', 'default'] },
-            { ...outputOptions, format: 'cjs' }
+            'var main=0;exports.main=main;exports.default=main;',
+            renderedChunk,
+            { ...outputOptions, format: 'cjs' },
+            { chunks: {} }
           )
         }
-        const expected = Error
+
+        const expected = Error(
+          'Failed to mix exports: "number" cannot be used as a default value. ' +
+          'Only "object" and "function" are allowed.'
+        )
 
         expect(received).toThrow(expected)
       })
 
-      it('Should return rendered chunk with mixing exports in un-minified format!', () => {
+      it('Should throw an error if the `exports.default` value is a `string`!', () => {
+        const received = (): void => {
+          outputGenerationHooks.renderChunk(
+            'var main="";exports.main=main;exports.default=main;',
+            renderedChunk,
+            { ...outputOptions, format: 'cjs' },
+            { chunks: {} }
+          )
+        }
+
+        const expected = Error(
+          'Failed to mix exports: "string" cannot be used as a default value. ' +
+          'Only "object" and "function" are allowed.'
+        )
+
+        expect(received).toThrow(expected)
+      })
+
+      it('Should throw an error if the `exports.default` value is a `symbol`!', () => {
+        const received = (): void => {
+          outputGenerationHooks.renderChunk(
+            'var main=Symbol("");exports.main=main;exports.default=main;',
+            renderedChunk,
+            { ...outputOptions, format: 'cjs' },
+            { chunks: {} }
+          )
+        }
+
+        const expected = Error(
+          'Failed to mix exports: "symbol" cannot be used as a default value. ' +
+          'Only "object" and "function" are allowed.'
+        )
+
+        expect(received).toThrow(expected)
+      })
+
+      it('Should return a rendered chunk with mixed exports!', () => {
         const received = outputGenerationHooks.renderChunk(
-          'exports.main = main;\nexports.default = main;',
-          { ...renderedChunk, exports: ['main', 'default'] },
-          { ...outputOptions, format: 'cjs' }
+          'var main = () => "main";\nexports.main = main;\nexports.default = main;',
+          renderedChunk,
+          { ...outputOptions, format: 'cjs' },
+          { chunks: {} }
         )
 
         const expected = {
           ...defaultValue,
-          code: 'module.exports = main;\nmodule.exports.main = main;\nmodule.exports.default = main;'
+          code: 'var main = () => "main";\nexports.main = main;\nexports.default = main;\nmodule.exports = exports.default;\nObject.defineProperties(module.exports, {\n  __esModule: { value: true },\n  main: { value: exports.main },\n  default: { value: exports.default }\n});'
         }
 
         expect(received).toEqual(expected)
       })
 
-      it('Should return rendered chunk with mixing exports in minified format!', () => {
-        const received = outputGenerationHooks.renderChunk(
-          'exports.main=main;exports.default=main;',
-          { ...renderedChunk, exports: ['main', 'default'] },
-          { ...outputOptions, format: 'cjs' }
-        )
-
-        const expected = {
-          ...defaultValue,
-          code: 'module.exports=main,module.exports.main=main;module.exports.default=main;'
-        }
-
-        expect(received).toEqual(expected)
-      })
-
-      describe('By mocking `store.excludeDefault` value to `true`:', () => {
+      describe('By mocking `store.minify` value to `true`:', () => {
         beforeEach(() => {
-          store.excludeDefault = true
+          store.minify = true
         })
 
         afterEach(() => {
-          delete store.excludeDefault
+          store.minify = false
         })
 
-        it('Should return rendered chunk with mixing exports and exclude `default` in un-minified format!', () => {
+        it('Should return a rendered chunk with mixed exports in a minified format!', () => {
           const received = outputGenerationHooks.renderChunk(
-            'exports.main = main;\nexports.default = main;',
-            { ...renderedChunk, exports: ['main', 'default'] },
-            { ...outputOptions, format: 'cjs' }
+            'var main=()=>"main";exports.main=main;exports.default=main;',
+            renderedChunk,
+            { ...outputOptions, format: 'cjs' },
+            { chunks: {} }
           )
 
           const expected = {
             ...defaultValue,
-            code: 'module.exports = main;\nmodule.exports.main = main;'
-          }
-
-          expect(received).toEqual(expected)
-        })
-
-        it('Should return rendered chunk with mixing exports and exclude `default` in minified format!', () => {
-          const received = outputGenerationHooks.renderChunk(
-            'exports.main=main;exports.default=main;',
-            { ...renderedChunk, exports: ['main', 'default'] },
-            { ...outputOptions, format: 'cjs' }
-          )
-
-          const expected = {
-            ...defaultValue,
-            code: 'module.exports=main,module.exports.main=main;'
+            code: 'var main=()=>"main";exports.main=main;exports.default=main;module.exports=exports.default;Object.defineProperties(module.exports,{__esModule:{value:!0},main:{value:exports.main},default:{value:exports.default}});'
           }
 
           expect(received).toEqual(expected)
