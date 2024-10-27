@@ -20,19 +20,22 @@ import store from '../store'
  *
  * @returns {object} The new rendered chunk object.
  */
-export const renderChunk = (
+export const renderChunk = async (
   code: string,
   chunk: RenderedChunk,
   { format }: NormalizedOutputOptions,
   meta: { chunks: Record<string, RenderedChunk> }
-): { code: string, map?: SourceMapInput } | string | null => {
+): Promise<{ code: string, map?: SourceMapInput }> => {
   // Skip to mixed exports if the format is not 'cjs'.
   if (format !== 'cjs') {
     return { code, map: null }
   }
 
   // Mix exports
-  const newCode = mixexports(code, { minify: store.minify })
+  const newCode = await mixexports(code, {
+    minify: store.minify,
+    defineEsModule: store.defineEsModule
+  })
 
   // Return the new rendered chunk object.
   return { code: newCode, map: null }

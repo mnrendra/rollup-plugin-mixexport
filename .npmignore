@@ -1,8 +1,11 @@
 .git
+__tests__/
 .github/
 coverage/
+dist/*.map
 node_modules/
 package/
+dummies/
 src/
 tests/
 .czrc*
