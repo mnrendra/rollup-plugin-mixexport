@@ -107,6 +107,9 @@ const config: Config = {
   // A map from regular expressions to module names or to arrays of module
   // names that allow to stub out resources with a single module
   moduleNameMapper: pathsToModuleNameMapper({
+    // @
+    '@': ['<rootDir>/src'],
+    '@/*': ['<rootDir>/src/*'],
     // @tests
     '@tests': ['<rootDir>/tests'],
     '@tests/*': ['<rootDir>/tests/*']
