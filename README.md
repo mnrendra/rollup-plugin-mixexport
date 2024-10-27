@@ -1,14 +1,20 @@
 # @mnrendra/rollup-plugin-mixexport
 
-🍣 A [Rollup](https://rollupjs.org/) plugin to mix the **named** and **default** exports together.  
-So, the consumers of your bundle will not have to use **chunk**`.default` to access their default export.
+🍣 A [Rollup](https://rollupjs.org/) plugin to mix **CommonJS** exports.  
+So, the consumers of your bundle will not have to use **chunk** `.default` to access their default export.
 
 ## Example:
 
 Your source code might be like this:
 
 ```javascript
-export const named () => {
+export let amount = 0
+
+export const increaseAmount = () => {
+  amount = amount + 1
+}
+
+export const named = () => {
   console.log('named')
 }
 
@@ -18,29 +24,39 @@ export default () => {
 
 ```
 
-Then, your consumer could consume by like this:
+Then, consumers could import it like this:
 
 ```javascript
-import index, { named } from 'your-module-name'
+import index, { named, increaseAmount } from 'your-module-name'
 index() // will print: 'default'
 named() // will print: 'named'
+index.default() // will print: 'default'
+
+console.log(index.amount) // will print: 0
+increaseAmount()
+console.log(index.amount) // will print: 1
 ```
 
-Or, could consume by like this:
+Or, they could use CommonJS syntax:
 
 ```javascript
 const index = require('your-module-name')
-const { named } = require('your-module-name')
+const { named, increaseAmount } = require('your-module-name')
 index() // will print: 'default'
 named() // will print: 'named'
+index.default() // will print: 'default'
+
+console.log(index.amount) // will print: 0
+increaseAmount()
+console.log(index.amount) // will print: 1
 ```
 ## Why?
-By default, Rollup keeps **named** and **default** exports separate, requiring `.default` for default exports. This plugin simplifies the consumer experience by merging them.
+By default, Rollup keeps **named** and **default** exports separate, requiring consumers to use `.default` to access default exports. This plugin simplifies the consumer experience by merging them.
 
 ## Requirements
 This plugin requires:  
-✅ [LTS](https://github.com/nodejs/Release) Node version (v14.0.0+),  
-✅ [Rollup](https://www.npmjs.com/package/rollup) (v4.22.4+),  
+✅ [LTS](https://github.com/nodejs/Release) Node version (v14.21.3+),  
+✅ [Rollup](https://www.npmjs.com/package/rollup) (v4.24.0+),  
 ✅ [ESBuild](https://www.npmjs.com/package/rollup-plugin-esbuild) plugin (v6.1.1+)  
 
 ## Install
@@ -50,7 +66,7 @@ npm i -D rollup-plugin-esbuild @mnrendra/rollup-plugin-mixexport
 
 ## Usage
 
-Using `rollup.config.mjs`:
+For **ES modules** (`rollup.config.mjs`):
 ```javascript
 import esbuild from 'rollup-plugin-esbuild' // 'rollup-plugin-esbuild' is required
 import mixexport from '@mnrendra/rollup-plugin-mixexport'
@@ -64,16 +80,11 @@ export default [
         file: 'dist/your_output_file.js',
         format: 'cjs',
         sourcemap: true
-      },
-      {
-        file: 'dist/your_output_file.mjs',
-        format: 'es',
-        sourcemap: true
       }
     ],
     plugins: [
-      esbuild({ minify: true }), // <-- need to execute `esbuild` immediately before `mixexport`
-      mixexport() // <-- execute `mixexport` immediately after `esbuild`
+      esbuild({ minify: true }), // <-- need `esbuild` to be executed immediately before `mixexport`
+      mixexport({ minify: true }) // <-- execute `mixexport` immediately after `esbuild`
     ],
     onwarn ({ code }) {
       if (code === 'MIXED_EXPORTS') return false // to disable Rollup's 'MIXED_EXPORTS' warning log
@@ -82,7 +93,7 @@ export default [
 ]
 ```
 
-Using `rollup.config.js`:
+For **CommonJS** (`rollup.config.js`):
 ```javascript
 const esbuild = require('rollup-plugin-esbuild') // 'rollup-plugin-esbuild' is required
 const mixexport = require('@mnrendra/rollup-plugin-mixexport')
@@ -96,16 +107,11 @@ module.exports = [
         file: 'dist/your_output_file.js',
         format: 'cjs',
         sourcemap: true
-      },
-      {
-        file: 'dist/your_output_file.mjs',
-        format: 'es',
-        sourcemap: true
       }
     ],
     plugins: [
-      esbuild({ minify: true }),
-      mixexport()
+      esbuild({ minify: true }), // <-- need `esbuild` to be executed immediately before `mixexport`
+      mixexport({ minify: true }) // <-- execute `mixexport` immediately after `esbuild`
     ],
     onwarn ({ code }) {
       if (code === 'MIXED_EXPORTS') return false // to disable Rollup's 'MIXED_EXPORTS' warning log
@@ -115,6 +121,7 @@ module.exports = [
 ```
 
 ## Options
+
 ```javascript
 const mixexport = require('@mnrendra/rollup-plugin-mixexport')
 
@@ -122,36 +129,23 @@ module.exports = [
   {
     plugins: [
       mixexport({
-        /**
-         * Exclude `module.exports.default`
-         *
-         * Set to `true` to exclude `module.exports.default`
-         *
-         * @default false
-         */
-        excludeDefault: true
+        minify: true, // To produce the minified or pretty format.
+        defineEsModule: true // To specify whether to define `exports.__esModule`.
       })
     ]
   }
 ]
 ```
-### • `excludeDefault`
-#### type: `boolean`
-#### default: `false`
-Exclude `module.exports.default`.<br/>
-Set to `true` to exclude `module.exports.default`.<br/>
 
-By default, `mixexport` generates output as follows:
-```javascript
-module.exports = main;
-module.exports.main = main;
-module.exports.default = main;
-```
-However, if the `excludeDefault` option is set to `true`, `mixexport` generates output as follows:
-```javascript
-module.exports = main;
-module.exports.main = main;
-```
+### • `minify`
+To produce the minified or pretty format.<br/>
+type: `boolean`<br/>
+default: `false`
+
+### • `defineEsModule`
+To specify whether to define `exports.__esModule`.<br/>
+type: `boolean|undefined`<br/>
+default: `undefined`
 
 ## License
 [MIT](https://github.com/mnrendra/rollup-plugin-mixexport/blob/HEAD/LICENSE)

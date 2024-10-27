@@ -23,13 +23,15 @@ interface Plugin extends RollupPlugin {
  * @see https://www.npmjs.com/package/@mnrendra/rollup-plugin-mixexport
  */
 const main = async ({
+  defineEsModule,
   minify = false
 }: Options = {}): Promise<Plugin> => {
   // Initialize store.
   await initStore(store)
 
-  // Store `minify` option.
+  // Store options.
   store.minify = minify
+  store.defineEsModule = defineEsModule
 
   // Print info.
   await printInfo(store)
