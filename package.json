@@ -1,6 +1,6 @@
 {
   "name": "@mnrendra/rollup-plugin-mixexport",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A Rollup plugin to mix CommonJS exports.",
   "private": false,
   "main": "dist/index.js",
