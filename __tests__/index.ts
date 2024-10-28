@@ -81,61 +81,61 @@ describe('Test all features:', () => {
     expect(received).toThrow(expected)
   })
 
-  it('Should return a code as `./dummies/1.resource.js` when given `./dummies/1.resource.js and `plugin.format` set to `\'cjs\'`!', async () => {
+  it('Should return a code as `./tests/dummies/1.resource.js` when given `./tests/dummies/1.resource.js and `plugin.format` set to `\'cjs\'`!', async () => {
     const received = await plugin.renderChunk(
-      read('./dummies/1.resource.js'),
+      read('./tests/dummies/1.resource.js'),
       {} as unknown as RenderedChunk,
       {} as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
     )
 
-    const expected = read('./dummies/1.resource.js')
+    const expected = read('./tests/dummies/1.resource.js')
 
     expect(received.code).toBe(expected)
   })
 
-  it('Should return a code as `./dummies/1.expected.js` when given `./dummies/1.resource.js!', async () => {
+  it('Should return a code as `./tests/dummies/1.expected.js` when given `./tests/dummies/1.resource.js!', async () => {
     const received = await plugin.renderChunk(
-      read('./dummies/1.resource.js'),
+      read('./tests/dummies/1.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
     )
 
-    const expected = read('./dummies/1.expected.js')
+    const expected = read('./tests/dummies/1.expected.js')
 
     expect(received.code).toBe(expected)
   })
 
-  it('Should return a code as `./dummies/2.expected.js` when given `./dummies/2.resource.js!', async () => {
+  it('Should return a code as `./tests/dummies/2.expected.js` when given `./tests/dummies/2.resource.js!', async () => {
     const received = await plugin.renderChunk(
-      read('./dummies/2.resource.js'),
+      read('./tests/dummies/2.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
     )
 
-    const expected = read('./dummies/2.expected.js')
+    const expected = read('./tests/dummies/2.expected.js')
 
     expect(received.code).toBe(expected)
   })
 
-  it('Should return a code as `./dummies/3.expected.js` when given `./dummies/3.resource.js!', async () => {
+  it('Should return a code as `./tests/dummies/3.expected.js` when given `./tests/dummies/3.resource.js!', async () => {
     const received = await plugin.renderChunk(
-      read('./dummies/3.resource.js'),
+      read('./tests/dummies/3.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
     )
 
-    const expected = read('./dummies/3.expected.js')
+    const expected = read('./tests/dummies/3.expected.js')
 
     expect(received.code).toBe(expected)
   })
 
-  it('Should reject within error when given `./dummies/9.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/9.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/9.resource.js'),
+      read('./tests/dummies/9.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -144,9 +144,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('The `exports` object is defined using `defineProperties`, so it cannot be imported using destructuring as `import { ... }`!'))
   })
 
-  it('Should reject within error when given `./dummies/10.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/10.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/10.resource.js'),
+      read('./tests/dummies/10.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -155,9 +155,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('Unable to extract the named export! Start: 194, End: 197'))
   })
 
-  it('Should reject within error when given `./dummies/11.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/11.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/11.resource.js'),
+      read('./tests/dummies/11.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -166,9 +166,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('Invalid named export property descriptor! Start: 182, End: 191'))
   })
 
-  it('Should reject within error when given `./dummies/12.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/12.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/12.resource.js'),
+      read('./tests/dummies/12.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -177,9 +177,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('The `amount` export has a getter and additional attributes, so it cannot be imported using destructuring as `import { amount }`!'))
   })
 
-  it('Should reject within error when given `./dummies/13.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/13.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/13.resource.js'),
+      read('./tests/dummies/13.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -188,9 +188,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('The `amount` export has a getter and additional attributes, so it cannot be imported using destructuring as `import { amount }`!'))
   })
 
-  it('Should reject within error when given `./dummies/14.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/14.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/14.resource.js'),
+      read('./tests/dummies/14.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -199,9 +199,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('The `amount` export has a value and setter attributes, so it cannot be imported using destructuring as `import { amount }`!'))
   })
 
-  it('Should reject within error when given `./dummies/15.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/15.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/15.resource.js'),
+      read('./tests/dummies/15.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -210,9 +210,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('The `amount` export has a value and configurable attributes, so it cannot be imported using destructuring as `import { amount }`!'))
   })
 
-  it('Should reject within error when given `./dummies/16.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/16.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/16.resource.js'),
+      read('./tests/dummies/16.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -221,9 +221,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('The `amount` export has no value or getter attributes, so it cannot be imported using destructuring as `import { amount }`!'))
   })
 
-  it('Should reject within error when given `./dummies/17.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/17.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/17.resource.js'),
+      read('./tests/dummies/17.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -232,9 +232,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('The `amount` export has a value or getter with `enumerable` set to `false` in its attributes, so it cannot be imported using destructuring as `import { amount }`!'))
   })
 
-  it('Should reject within error when given `./dummies/18.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/18.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/18.resource.js'),
+      read('./tests/dummies/18.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -243,9 +243,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('The `amount` export has a value or getter with `enumerable` set to `false` in its attributes, so it cannot be imported using destructuring as `import { amount }`!'))
   })
 
-  it('Should reject within error when given `./dummies/19.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/19.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/19.resource.js'),
+      read('./tests/dummies/19.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -254,9 +254,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('The `amount` export has a value or getter with `enumerable` set to `false` in its attributes, so it cannot be imported using destructuring as `import { amount }`!'))
   })
 
-  it('Should reject within error when given `./dummies/20.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/20.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/20.resource.js'),
+      read('./tests/dummies/20.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -265,74 +265,74 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('The `amount` export has a value or getter with `enumerable` set to `false` in its attributes, so it cannot be imported using destructuring as `import { amount }`!'))
   })
 
-  it('Should return a code as `./dummies/21.expected.js` when given `./dummies/21.resource.js!', async () => {
+  it('Should return a code as `./tests/dummies/21.expected.js` when given `./tests/dummies/21.resource.js!', async () => {
     const received = await plugin.renderChunk(
-      read('./dummies/21.resource.js'),
+      read('./tests/dummies/21.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
     )
 
-    const expected = read('./dummies/21.expected.js')
+    const expected = read('./tests/dummies/21.expected.js')
 
     expect(received.code).toBe(expected)
   })
 
-  it('Should return a code as `./dummies/22.expected.js` when given `./dummies/22.resource.js!', async () => {
+  it('Should return a code as `./tests/dummies/22.expected.js` when given `./tests/dummies/22.resource.js!', async () => {
     const received = await plugin.renderChunk(
-      read('./dummies/22.resource.js'),
+      read('./tests/dummies/22.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
     )
 
-    const expected = read('./dummies/22.expected.js')
+    const expected = read('./tests/dummies/22.expected.js')
 
     expect(received.code).toBe(expected)
   })
 
-  it('Should return a code as `./dummies/23.expected.js` when given `./dummies/23.resource.js!', async () => {
+  it('Should return a code as `./tests/dummies/23.expected.js` when given `./tests/dummies/23.resource.js!', async () => {
     const received = await plugin.renderChunk(
-      read('./dummies/23.resource.js'),
+      read('./tests/dummies/23.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
     )
 
-    const expected = read('./dummies/23.expected.js')
+    const expected = read('./tests/dummies/23.expected.js')
 
     expect(received.code).toBe(expected)
   })
 
-  it('Should return a code as `./dummies/24.expected.js` when given `./dummies/24.resource.js!', async () => {
+  it('Should return a code as `./tests/dummies/24.expected.js` when given `./tests/dummies/24.resource.js!', async () => {
     const received = await plugin.renderChunk(
-      read('./dummies/24.resource.js'),
+      read('./tests/dummies/24.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
     )
 
-    const expected = read('./dummies/24.expected.js')
+    const expected = read('./tests/dummies/24.expected.js')
 
     expect(received.code).toBe(expected)
   })
 
-  it('Should return a code as `./dummies/25.expected.js` when given `./dummies/25.resource.js!', async () => {
+  it('Should return a code as `./tests/dummies/25.expected.js` when given `./tests/dummies/25.resource.js!', async () => {
     const received = await plugin.renderChunk(
-      read('./dummies/25.resource.js'),
+      read('./tests/dummies/25.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
     )
 
-    const expected = read('./dummies/25.expected.js')
+    const expected = read('./tests/dummies/25.expected.js')
 
     expect(received.code).toBe(expected)
   })
 
-  it('Should reject within error when given `./dummies/26.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/26.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/26.resource.js'),
+      read('./tests/dummies/26.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -341,9 +341,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('Your code contains both `module.exports` and `exports.default`, which is not recommended. Please use one!'))
   })
 
-  it('Should reject within error when given `./dummies/27.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/27.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/27.resource.js'),
+      read('./tests/dummies/27.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -352,9 +352,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('Failed to mix exports: "bigint" cannot be used as a default value. Only "object" and "function" are allowed.'))
   })
 
-  it('Should reject within error when given `./dummies/28.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/28.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/28.resource.js'),
+      read('./tests/dummies/28.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -363,9 +363,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('Failed to mix exports: "boolean" cannot be used as a default value. Only "object" and "function" are allowed.'))
   })
 
-  it('Should reject within error when given `./dummies/29.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/29.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/29.resource.js'),
+      read('./tests/dummies/29.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -374,9 +374,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('Failed to mix exports: "number" cannot be used as a default value. Only "object" and "function" are allowed.'))
   })
 
-  it('Should reject within error when given `./dummies/30.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/30.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/30.resource.js'),
+      read('./tests/dummies/30.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -385,9 +385,9 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('Failed to mix exports: "string" cannot be used as a default value. Only "object" and "function" are allowed.'))
   })
 
-  it('Should reject within error when given `./dummies/31.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/31.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/31.resource.js'),
+      read('./tests/dummies/31.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
@@ -396,15 +396,28 @@ describe('Test all features:', () => {
     await expect(received).rejects.toThrow(Error('Failed to mix exports: "symbol" cannot be used as a default value. Only "object" and "function" are allowed.'))
   })
 
-  it('Should reject within error when given `./dummies/32.resource.js`!', async () => {
+  it('Should reject within error when given `./tests/dummies/32.resource.js`!', async () => {
     const received = plugin.renderChunk(
-      read('./dummies/32.resource.js'),
+      read('./tests/dummies/32.resource.js'),
       {} as unknown as RenderedChunk,
       { format: 'cjs' } as unknown as NormalizedOutputOptions,
       {} as unknown as Meta
     )
 
     await expect(received).rejects.toThrow(Error('Failed to mix exports: "null" cannot be used as a default value. Only "object" and "function" are allowed.'))
+  })
+
+  it('Should return `./tests/dummies/33.expected.js` when given `./tests/dummies/33.resource.js`!', async () => {
+    const received = await plugin.renderChunk(
+      read('./tests/dummies/33.resource.js'),
+      {} as unknown as RenderedChunk,
+      { format: 'cjs' } as unknown as NormalizedOutputOptions,
+      {} as unknown as Meta
+    )
+
+    const expected = read('./tests/dummies/33.expected.js')
+
+    expect(received.code).toBe(expected)
   })
 
   describe('By setting `defineEsModule` option to be `true`:', () => {
@@ -414,28 +427,28 @@ describe('Test all features:', () => {
       plugin = await index({ defineEsModule: true })
     })
 
-    it('Should return a code as `./dummies/4.expected.js` when given `./dummies/4.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/4.expected.js` when given `./tests/dummies/4.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/4.resource.js'),
+        read('./tests/dummies/4.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/4.expected.js')
+      const expected = read('./tests/dummies/4.expected.js')
 
       expect(received.code).toBe(expected)
     })
 
-    it('Should return a code as `./dummies/6.expected.js` when given `./dummies/6.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/6.expected.js` when given `./tests/dummies/6.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/6.resource.js'),
+        read('./tests/dummies/6.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/6.expected.js')
+      const expected = read('./tests/dummies/6.expected.js')
 
       expect(received.code).toBe(expected)
     })
@@ -448,41 +461,41 @@ describe('Test all features:', () => {
       plugin = await index({ defineEsModule: false })
     })
 
-    it('Should return a code as `./dummies/5.expected.js` when given `./dummies/5.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/5.expected.js` when given `./tests/dummies/5.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/5.resource.js'),
+        read('./tests/dummies/5.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/5.expected.js')
+      const expected = read('./tests/dummies/5.expected.js')
 
       expect(received.code).toBe(expected)
     })
 
-    it('Should return a code as `./dummies/7.expected.js` when given `./dummies/7.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/7.expected.js` when given `./tests/dummies/7.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/7.resource.js'),
+        read('./tests/dummies/7.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/7.expected.js')
+      const expected = read('./tests/dummies/7.expected.js')
 
       expect(received.code).toBe(expected)
     })
 
-    it('Should return a code as `./dummies/8.expected.js` when given `./dummies/8.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/8.expected.js` when given `./tests/dummies/8.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/8.resource.js'),
+        read('./tests/dummies/8.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/8.expected.js')
+      const expected = read('./tests/dummies/8.expected.js')
 
       expect(received.code).toBe(expected)
     })
@@ -495,28 +508,28 @@ describe('Test all features:', () => {
       plugin = await index({ defineEsModule: true, minify: true })
     })
 
-    it('Should return a code as `./dummies/4.expected.min.js` when given `./dummies/4.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/4.expected.min.js` when given `./tests/dummies/4.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/4.resource.js'),
+        read('./tests/dummies/4.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/4.expected.min.js')
+      const expected = read('./tests/dummies/4.expected.min.js')
 
       expect(received.code).toBe(expected)
     })
 
-    it('Should return a code as `./dummies/6.expected.min.js` when given `./dummies/6.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/6.expected.min.js` when given `./tests/dummies/6.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/6.resource.js'),
+        read('./tests/dummies/6.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/6.expected.min.js')
+      const expected = read('./tests/dummies/6.expected.min.js')
 
       expect(received.code).toBe(expected)
     })
@@ -529,41 +542,41 @@ describe('Test all features:', () => {
       plugin = await index({ defineEsModule: false, minify: true })
     })
 
-    it('Should return a code as `./dummies/5.expected.min.js` when given `./dummies/5.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/5.expected.min.js` when given `./tests/dummies/5.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/5.resource.js'),
+        read('./tests/dummies/5.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/5.expected.min.js')
+      const expected = read('./tests/dummies/5.expected.min.js')
 
       expect(received.code).toBe(expected)
     })
 
-    it('Should return a code as `./dummies/7.expected.min.js` when given `./dummies/7.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/7.expected.min.js` when given `./tests/dummies/7.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/7.resource.js'),
+        read('./tests/dummies/7.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/7.expected.min.js')
+      const expected = read('./tests/dummies/7.expected.min.js')
 
       expect(received.code).toBe(expected)
     })
 
-    it('Should return a code as `./dummies/8.expected.min.js` when given `./dummies/8.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/8.expected.min.js` when given `./tests/dummies/8.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/8.resource.js'),
+        read('./tests/dummies/8.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/8.expected.min.js')
+      const expected = read('./tests/dummies/8.expected.min.js')
 
       expect(received.code).toBe(expected)
     })
@@ -576,106 +589,119 @@ describe('Test all features:', () => {
       plugin = await index({ minify: true })
     })
 
-    it('Should return a code as `./dummies/1.expected.min.js` when given `./dummies/1.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/1.expected.min.js` when given `./tests/dummies/1.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/1.resource.js'),
+        read('./tests/dummies/1.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/1.expected.min.js')
+      const expected = read('./tests/dummies/1.expected.min.js')
 
       expect(received.code).toBe(expected)
     })
 
-    it('Should return a code as `./dummies/2.expected.min.js` when given `./dummies/2.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/2.expected.min.js` when given `./tests/dummies/2.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/2.resource.js'),
+        read('./tests/dummies/2.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/2.expected.min.js')
+      const expected = read('./tests/dummies/2.expected.min.js')
 
       expect(received.code).toBe(expected)
     })
 
-    it('Should return a code as `./dummies/3.expected.min.js` when given `./dummies/3.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/3.expected.min.js` when given `./tests/dummies/3.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/3.resource.js'),
+        read('./tests/dummies/3.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/3.expected.min.js')
+      const expected = read('./tests/dummies/3.expected.min.js')
 
       expect(received.code).toBe(expected)
     })
 
-    it('Should return a code as `./dummies/21.expected.min.js` when given `./dummies/21.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/21.expected.min.js` when given `./tests/dummies/21.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/21.resource.js'),
+        read('./tests/dummies/21.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/21.expected.min.js')
+      const expected = read('./tests/dummies/21.expected.min.js')
 
       expect(received.code).toBe(expected)
     })
 
-    it('Should return a code as `./dummies/22.expected.min.js` when given `./dummies/22.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/22.expected.min.js` when given `./tests/dummies/22.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/22.resource.js'),
+        read('./tests/dummies/22.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/22.expected.min.js')
+      const expected = read('./tests/dummies/22.expected.min.js')
 
       expect(received.code).toBe(expected)
     })
 
-    it('Should return a code as `./dummies/23.expected.min.js` when given `./dummies/23.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/23.expected.min.js` when given `./tests/dummies/23.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/23.resource.js'),
+        read('./tests/dummies/23.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/23.expected.min.js')
+      const expected = read('./tests/dummies/23.expected.min.js')
 
       expect(received.code).toBe(expected)
     })
 
-    it('Should return a code as `./dummies/24.expected.min.js` when given `./dummies/24.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/24.expected.min.js` when given `./tests/dummies/24.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/24.resource.js'),
+        read('./tests/dummies/24.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/24.expected.min.js')
+      const expected = read('./tests/dummies/24.expected.min.js')
 
       expect(received.code).toBe(expected)
     })
 
-    it('Should return a code as `./dummies/25.expected.min.js` when given `./dummies/25.resource.js!', async () => {
+    it('Should return a code as `./tests/dummies/25.expected.min.js` when given `./tests/dummies/25.resource.js!', async () => {
       const received = await plugin.renderChunk(
-        read('./dummies/25.resource.js'),
+        read('./tests/dummies/25.resource.js'),
         {} as unknown as RenderedChunk,
         { format: 'cjs' } as unknown as NormalizedOutputOptions,
         {} as unknown as Meta
       )
 
-      const expected = read('./dummies/25.expected.min.js')
+      const expected = read('./tests/dummies/25.expected.min.js')
+
+      expect(received.code).toBe(expected)
+    })
+
+    it('Should return `./tests/dummies/33.expected.min.js` when given `./tests/dummies/33.resource.js`!', async () => {
+      const received = await plugin.renderChunk(
+        read('./tests/dummies/33.resource.js'),
+        {} as unknown as RenderedChunk,
+        { format: 'cjs' } as unknown as NormalizedOutputOptions,
+        {} as unknown as Meta
+      )
+
+      const expected = read('./tests/dummies/33.expected.min.js')
 
       expect(received.code).toBe(expected)
     })
