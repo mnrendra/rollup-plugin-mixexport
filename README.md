@@ -1,12 +1,9 @@
 # @mnrendra/rollup-plugin-mixexport
-
 🍣 A [Rollup](https://rollupjs.org/) plugin to mix **CommonJS** exports.  
 So, the consumers of your bundle will not have to use **chunk** `.default` to access their default export.
 
 ## Example:
-
 Your source code might be like this:
-
 ```javascript
 export let amount = 0
 
@@ -21,31 +18,24 @@ export const named = () => {
 export default () => {
   console.log('default')
 }
-
 ```
-
 Then, consumers could import it like this:
-
 ```javascript
 import index, { named, increaseAmount } from 'your-module-name'
 index() // will print: 'default'
 named() // will print: 'named'
 index.default() // will print: 'default'
-
 console.log(index.amount) // will print: 0
 increaseAmount()
 console.log(index.amount) // will print: 1
 ```
-
 Or, they could use CommonJS syntax:
-
 ```javascript
 const index = require('your-module-name')
 const { named, increaseAmount } = require('your-module-name')
 index() // will print: 'default'
 named() // will print: 'named'
 index.default() // will print: 'default'
-
 console.log(index.amount) // will print: 0
 increaseAmount()
 console.log(index.amount) // will print: 1
@@ -65,7 +55,6 @@ npm i -D rollup-plugin-esbuild @mnrendra/rollup-plugin-mixexport
 ```
 
 ## Usage
-
 For **ES modules** (`rollup.config.mjs`):
 ```javascript
 import esbuild from 'rollup-plugin-esbuild' // 'rollup-plugin-esbuild' is required
@@ -92,7 +81,6 @@ export default [
   }
 ]
 ```
-
 For **CommonJS** (`rollup.config.js`):
 ```javascript
 const esbuild = require('rollup-plugin-esbuild') // 'rollup-plugin-esbuild' is required
@@ -121,7 +109,6 @@ module.exports = [
 ```
 
 ## Options
-
 ```javascript
 const mixexport = require('@mnrendra/rollup-plugin-mixexport')
 
