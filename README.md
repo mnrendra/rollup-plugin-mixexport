@@ -68,7 +68,7 @@ export default {
      sourcemap: true
   },
   plugins: [
-    esbuild({ minify: true }), // <-- need `esbuild` to be executed immediately before `mixexport`
+    esbuild(), // <-- need `esbuild` to be executed immediately before `mixexport`
     alias(), // <-- optional to resolve alias paths
     mixexport({ minify: true }) // <-- execute `mixexport` immediately after `esbuild` or `alias`
   ],
@@ -92,7 +92,7 @@ module.exports = {
     sourcemap: true
   },
   plugins: [
-    esbuild({ minify: true }), // <-- need `esbuild` to be executed immediately before `mixexport`
+    esbuild(), // <-- need `esbuild` to be executed immediately before `mixexport`
     alias(), // <-- optional to resolve alias paths
     mixexport({ minify: true }) // <-- execute `mixexport` immediately after `esbuild` or `alias`
   ],
@@ -117,14 +117,14 @@ module.exports = {
 ```
 
 ### • `minify`
-To produce the minified or pretty format.<br/>
 *type: `boolean`*<br/>
-*default: `false`*
+*default: `false`*<br/>
+To produce the minified or pretty format.
 
 ### • `defineEsModule`
-To specify whether to define `exports.__esModule`.<br/>
 *type: `boolean|undefined`*<br/>
-*default: `undefined`*
+*default: `undefined`*<br/>
+To specify whether to define `exports.__esModule`.
 
 ## Types
 ```typescript
