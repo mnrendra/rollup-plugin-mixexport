@@ -40,7 +40,7 @@ describe('Test all features:', () => {
       })
     }
 
-    const expected = Error(`\`rollup-plugin-esbuild\` is required and must be invoked immediately before \`${pkg.name}\`!\nMore info: ${pkg.homepage}`)
+    const expected = Error(`"rollup-plugin-esbuild" or "@mnrendra/rollup-plugin-alias" is required and must be invoked immediately before "${pkg.name}"!\nMore info: ${pkg.homepage}`)
 
     expect(received).toThrow(expected)
   })
@@ -52,19 +52,19 @@ describe('Test all features:', () => {
       })
     }
 
-    const expected = Error(`\`rollup-plugin-esbuild\` is required and must be invoked immediately before \`${pkg.name}\`!\nMore info: ${pkg.homepage}`)
+    const expected = Error(`"rollup-plugin-esbuild" or "@mnrendra/rollup-plugin-alias" is required and must be invoked immediately before "${pkg.name}"!\nMore info: ${pkg.homepage}`)
 
     expect(received).toThrow(expected)
   })
 
-  it('Should throw an error when the preceding plugin name is not `\'esbuild\'`!', () => {
+  it('Should throw an error when the preceding plugin name is not "esbuild" or "alias"!', () => {
     const received = (): void => {
       plugin.buildStart({
         plugins: [{ name: '' }] as unknown as InputPluginOption
       })
     }
 
-    const expected = Error(`\`rollup-plugin-esbuild\` is required and must be invoked immediately before \`${pkg.name}\`!\nMore info: ${pkg.homepage}`)
+    const expected = Error(`"rollup-plugin-esbuild" or "@mnrendra/rollup-plugin-alias" is required and must be invoked immediately before "${pkg.name}"!\nMore info: ${pkg.homepage}`)
 
     expect(received).toThrow(expected)
   })
@@ -76,7 +76,7 @@ describe('Test all features:', () => {
       })
     }
 
-    const expected = Error(`\`rollup-plugin-esbuild\` is required and must be invoked immediately before \`${pkg.name}\`!\nMore info: ${pkg.homepage}`)
+    const expected = Error(`"rollup-plugin-esbuild" or "@mnrendra/rollup-plugin-alias" is required and must be invoked immediately before "${pkg.name}"!\nMore info: ${pkg.homepage}`)
 
     expect(received).toThrow(expected)
   })

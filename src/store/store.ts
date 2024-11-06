@@ -1,15 +1,18 @@
-import type { Store as Storage } from '@mnrendra/rollup-utils'
+import type { Store as BaseStore } from '@mnrendra/rollup-utils'
 
 import type { Options } from '../types'
 
-interface Store extends Storage, Options {}
+interface Store extends BaseStore, Options {}
 
 const store: Store = {
+  // base store
   pluginName: '',
   name: '',
   version: '',
   homepage: '',
-  minify: false
+  // options
+  minify: false,
+  defineEsModule: undefined
 }
 
 export default store

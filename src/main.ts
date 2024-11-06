@@ -1,6 +1,4 @@
-import type { Plugin as RollupPlugin } from 'rollup'
-
-import type { Options } from './types'
+import type { Options, Plugin } from './types'
 
 import { initStore, printInfo } from '@mnrendra/rollup-utils'
 
@@ -8,15 +6,12 @@ import store from './store'
 
 import { buildHooks, outputGenerationHooks } from './core'
 
-interface Plugin extends RollupPlugin {
-  name: string
-  version: string
-  buildStart: typeof buildHooks.buildStart
-  renderChunk: typeof outputGenerationHooks.renderChunk
-}
-
 /**
- * Rollup plugin for mixing exports.
+ * 🍣 A [Rollup](https://rollupjs.org/) plugin to mix **CommonJS** exports. So,
+ * the consumers of your bundle will not have to use **chunk** `.default` to
+ * access their default export.
+ *
+ * @param {Options} options Options object.
  *
  * @returns {Promise<Plugin>} Rollup plugin object.
  *
