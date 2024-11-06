@@ -3,11 +3,13 @@ import type { InputOptions } from 'rollup'
 import store from '../store'
 
 /**
- * The Rollup `buildStart` hook.
+ * Rollup `buildStart` hook.
  *
- * Part of Rollup's Build Hooks.
+ * *Part of Rollup's Build Hooks.*
  *
- * @param {InputOptions} options - Rollup `InputOptions`.
+ * @param {InputOptions} options Rollup `InputOptions`.
+ *
+ * @see https://rollupjs.org/plugin-development/#buildstart
  */
 export const buildStart = ({
   plugins

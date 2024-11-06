@@ -9,16 +9,18 @@ import mixexports from '@mnrendra/mixexports'
 import store from '../store'
 
 /**
- * The Rollup `renderChunk` hook.
+ * Rollup `renderChunk` hook.
  *
- * Part of Rollup's Output Generation Hooks.
+ * *Part of Rollup's Output Generation Hooks.*
  *
- * @param {string} code - The stringed code from `Rollup`.
- * @param {RenderedChunk} chunk - The rendered chunk.
- * @param {NormalizedOutputOptions} ouputOptions - The normalized outputOptions.
- * @param {{ chunks: Record<string, RenderedChunk> }} meta - The meta of chunk.
+ * @param {string} code Stringed code from `Rollup`.
+ * @param {RenderedChunk} chunk Rendered chunk.
+ * @param {NormalizedOutputOptions} ouputOptions Normalized `outputOptions`.
+ * @param {{ chunks: Record<string, RenderedChunk> }} meta Meta of chunk.
  *
- * @returns {object} The new rendered chunk object.
+ * @returns {object} Rendered chunk object.
+ *
+ * @see https://rollupjs.org/plugin-development/#renderchunk
  */
 export const renderChunk = async (
   code: string,
