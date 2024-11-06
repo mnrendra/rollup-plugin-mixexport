@@ -18,8 +18,8 @@ export const buildStart = ({
     homepage
   }: typeof store): Error => {
     return new Error(
-      '`rollup-plugin-esbuild` is required and must be invoked immediately ' +
-      `before \`${name}\`!\nMore info: ${homepage}`
+      '"rollup-plugin-esbuild" or "@mnrendra/rollup-plugin-alias" is required and must be invoked immediately ' +
+      `before "${name}"!\nMore info: ${homepage}`
     )
   }
 
@@ -41,7 +41,7 @@ export const buildStart = ({
   const precedingPlugin = pluginNames[pluginNames.indexOf(store.pluginName) - 1]
 
   // Throw an error if the `precedingPlugin` is not `esbuild`.
-  if (precedingPlugin !== 'esbuild') {
+  if (!(precedingPlugin === 'esbuild' || precedingPlugin === 'alias')) {
     throw errorMessage(store)
   }
 }
