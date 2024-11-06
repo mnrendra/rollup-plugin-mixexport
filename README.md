@@ -42,11 +42,6 @@ console.log(index.amount) // will print: 1
 ## Why?
 By default, [Rollup](https://rollupjs.org/) keeps **named** and **default** exports separate, requiring consumers to use `.default` to access default exports. This plugin simplifies the consumer experience by merging them.
 
-## Requirements
-✅ [LTS](https://github.com/nodejs/Release) Node version (v14.21.3+),  
-✅ [Rollup](https://www.npmjs.com/package/rollup) (v4.24.0+),  
-✅ [ESBuild](https://www.npmjs.com/package/rollup-plugin-esbuild) plugin (v6.1.1+)  
-
 ## Install
 ```bash
 npm i -D rollup-plugin-esbuild @mnrendra/rollup-plugin-alias @mnrendra/rollup-plugin-mixexport
@@ -56,7 +51,7 @@ npm i -D rollup-plugin-esbuild @mnrendra/rollup-plugin-alias @mnrendra/rollup-pl
 For **ES modules** (`rollup.config.mjs`):
 ```javascript
 import esbuild from 'rollup-plugin-esbuild' // 'rollup-plugin-esbuild' is required
-import alias from '@mnrendra/rollup-plugin-mixexport' // (optional) to resolve alias paths
+import alias from '@mnrendra/rollup-plugin-mixexport' // (Optional) to resolve alias paths
 import mixexport from '@mnrendra/rollup-plugin-mixexport'
 
 export default {
@@ -65,22 +60,22 @@ export default {
   output: {
     file: 'dist/your_output_file.js',
     format: 'cjs',
-     sourcemap: true
+    sourcemap: true
   },
   plugins: [
-    esbuild(), // <-- need `esbuild` to be executed immediately before `mixexport`
-    alias(), // <-- optional to resolve alias paths
-    mixexport({ minify: true }) // <-- execute `mixexport` immediately after `esbuild` or `alias`
+    esbuild(), // <-- Require `esbuild` to be executed immediately before `mixexport` or `alias`
+    alias(), // <-- Optional to resolve alias paths
+    mixexport({ minify: true }) // <-- Execute `mixexport` immediately after `esbuild` or `alias`
   ],
   onwarn ({ code }) {
-    if (code === 'MIXED_EXPORTS') return false // to disable Rollup's 'MIXED_EXPORTS' warning log
+    if (code === 'MIXED_EXPORTS') return false // To disable Rollup's 'MIXED_EXPORTS' warning log
   }
 }
 ```
 For **CommonJS** (`rollup.config.js`):
 ```javascript
 const esbuild = require('rollup-plugin-esbuild') // 'rollup-plugin-esbuild' is required
-const alias = require('@mnrendra/rollup-plugin-mixexport') // (optional) to resolve alias paths
+const alias = require('@mnrendra/rollup-plugin-mixexport') // (Optional) to resolve alias paths
 const mixexport = require('@mnrendra/rollup-plugin-mixexport')
 
 module.exports = {
@@ -92,12 +87,12 @@ module.exports = {
     sourcemap: true
   },
   plugins: [
-    esbuild(), // <-- need `esbuild` to be executed immediately before `mixexport`
-    alias(), // <-- optional to resolve alias paths
+    esbuild(), // <-- Require `esbuild` to be executed immediately before `mixexport` or `alias`
+    alias(), // <-- Optional to resolve alias paths
     mixexport({ minify: true }) // <-- execute `mixexport` immediately after `esbuild` or `alias`
   ],
   onwarn ({ code }) {
-    if (code === 'MIXED_EXPORTS') return false // to disable Rollup's 'MIXED_EXPORTS' warning log
+    if (code === 'MIXED_EXPORTS') return false // To disable Rollup's 'MIXED_EXPORTS' warning log
   }
 }
 ```
