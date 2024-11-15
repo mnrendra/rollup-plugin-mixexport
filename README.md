@@ -18,7 +18,7 @@ export default () => {
   console.log('default')
 }
 ```
-Then, consumers could import it like this:
+Then, consumers could import it like this (use `ES Modules`):
 ```javascript
 import index, { named, increaseAmount } from 'your-module-name'
 index() // will print: 'default'
@@ -28,7 +28,7 @@ console.log(index.amount) // will print: 0
 increaseAmount()
 console.log(index.amount) // will print: 1
 ```
-Or, they could use CommonJS syntax:
+Or, they could require it like this (use `CommonJS`):
 ```javascript
 const index = require('your-module-name')
 const { named, increaseAmount } = require('your-module-name')
@@ -89,7 +89,7 @@ module.exports = {
   plugins: [
     esbuild(), // <-- Require `esbuild` to be executed immediately before `mixexport` or `alias`
     alias(), // <-- Optional to resolve alias paths
-    mixexport({ minify: true }) // <-- execute `mixexport` immediately after `esbuild` or `alias`
+    mixexport({ minify: true }) // <-- Execute `mixexport` immediately after `esbuild` or `alias`
   ],
   onwarn ({ code }) {
     if (code === 'MIXED_EXPORTS') return false // To disable Rollup's 'MIXED_EXPORTS' warning log

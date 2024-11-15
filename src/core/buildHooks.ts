@@ -7,7 +7,7 @@ import store from '../store'
  *
  * *Part of Rollup's Build Hooks.*
  *
- * @param {InputOptions} options Rollup `InputOptions`.
+ * @param {InputOptions} options - Rollup `InputOptions`.
  *
  * @see https://rollupjs.org/plugin-development/#buildstart
  */
