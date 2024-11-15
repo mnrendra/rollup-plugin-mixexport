@@ -5,17 +5,17 @@
  */
 interface Options {
   /**
-   * To produce the minified or pretty format.
-   *
-   * @default false
-   */
-
-  /**
    * To specify whether to define `exports.__esModule`.
    *
    * @default undefined
    */
   defineEsModule?: boolean
+
+  /**
+   * To produce the minified or pretty format.
+   *
+   * @default false
+   */
   minify?: boolean
 }
 

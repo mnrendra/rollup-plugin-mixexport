@@ -11,7 +11,7 @@ import { buildHooks, outputGenerationHooks } from './core'
  * the consumers of your bundle will not have to use **chunk** `.default` to
  * access their default export.
  *
- * @param {Options} options Options object.
+ * @param {Options} options - The options object.
  *
  * @returns {Promise<Plugin>} Rollup plugin object.
  *
@@ -25,8 +25,8 @@ const main = async ({
   await initStore(store)
 
   // Store options.
-  store.minify = minify
   store.defineEsModule = defineEsModule
+  store.minify = minify
 
   // Print info.
   await printInfo(store)
@@ -54,5 +54,4 @@ const main = async ({
   }
 }
 
-// Export the `main` as the default value.
 export default main

@@ -11,8 +11,8 @@ const store: Store = {
   version: '',
   homepage: '',
   // options
-  minify: false,
-  defineEsModule: undefined
+  defineEsModule: undefined,
+  minify: false
 }
 
 export default store

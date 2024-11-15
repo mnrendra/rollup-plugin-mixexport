@@ -13,12 +13,12 @@ import store from '../store'
  *
  * *Part of Rollup's Output Generation Hooks.*
  *
- * @param {string} code Stringed code from `Rollup`.
- * @param {RenderedChunk} chunk Rendered chunk.
- * @param {NormalizedOutputOptions} ouputOptions Normalized `outputOptions`.
- * @param {{ chunks: Record<string, RenderedChunk> }} meta Meta of chunk.
+ * @param {string} code - Stringed code from `Rollup`.
+ * @param {RenderedChunk} chunk - Rendered chunk.
+ * @param {NormalizedOutputOptions} ouputOptions - Normalized `outputOptions`.
+ * @param {{ chunks: Record<string, RenderedChunk> }} meta - Meta of chunk.
  *
- * @returns {object} Rendered chunk object.
+ * @returns {{ code: string, map?: SourceMapInput }} Rendered chunk object.
  *
  * @see https://rollupjs.org/plugin-development/#renderchunk
  */
