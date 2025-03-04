@@ -29,7 +29,7 @@ const main = async ({
   store.minify = minify
 
   // Print info.
-  await printInfo(store)
+  printInfo(store)
 
   // Return Rollup plugin object.
   return {
